@@ -26,7 +26,7 @@ db.users.insertMany([
         pais: "Colombia",
         salario: 500,
         edad: 25,
-        altura: 1.68,
+        altura: 168,
         peso: 200
     },
     {
@@ -38,7 +38,7 @@ db.users.insertMany([
         pais: "Colombia",
         salario: 2000,
         edad: 25,
-        altura: 1.66,
+        altura: 166,
         peso: 120
     },
     {
@@ -100,7 +100,7 @@ db.users.insertMany([
         edad: 24,
         altura: 167,
         peso: 130
-    }, 
+    },
     {
         nombres: "Javier",
         apellidos: "González",
@@ -300,7 +300,7 @@ db.users.insertMany([
         genero: "F",
         ciudad: "Bangalore",
         pais: "India",
-        salario: null,
+        salario: 2523,
         edad: 24,
         altura: 163,
         peso: 155
@@ -312,98 +312,103 @@ db.users.insertMany([
         genero: "M",
         ciudad: "Delhi",
         pais: "India",
-        salario: null,
+        salario: 6520,
         edad: 26,
         altura: 175,
         peso: 170
     }
 ]);
 
-db.users.find();
-
 // --- Operaciones de Eliminacion ---
 
 // 1
-db.users.deleteMany({ salario : { $lt: 2000 } });
+db.users.deleteMany({ salario: { $lt: 2000 } });
 
 // 2
-db.users.deleteMany({ edad : { $lt: 25 } });
+db.users.deleteMany({ edad: { $lt: 25 } });
 
 // 3
-db.users.deleteMany({ ciudad : "Paris" });
+db.users.deleteMany({ ciudad: "Paris" });
 
 // 4
-db.users.deleteMany({ peso : { $gt: 180 } });
+db.users.deleteMany({ peso: { $gt: 180 } });
 
 //5
-db.users.deleteMany({ altura : { $lt: 160 } });
+db.users.deleteMany({ altura: { $lt: 160 } });
 
 // 6
 db.users.deleteMany({
-  $and: [
-    { nombres : "Jhon" },
-    { apellidos : "Doe" }
-  ]
+    $and: [
+        { nombres: "Jhon" },
+        { apellidos: "Doe" }
+    ]
 });
 
 // 7
-db.users.deleteMany({ correo : { $regex: /(@outlook.com)$/ } });
+db.users.deleteMany({ correo: { $regex: /(@outlook.com)$/ } });
 
 // 8
-db.users.deleteMany({ correo : "" });
+db.users.deleteMany({ correo: "" });
 
 // 9
-db.users.deleteMany({ ciudad : "Tokyo" });
+db.users.deleteMany({ ciudad: "Tokyo" });
 
 // 10
-db.users.deleteMany({ edad : { $lt: 18 } });
+db.users.deleteMany({ edad: { $lt: 18 } });
 
 // 11
-db.users.deleteMany({ salario : 0 });
+db.users.deleteMany({ salario: 0 });
 
 // 12
 db.users.deleteMany({
-  $and: [
-    { ciudad : "New York" },
-    { salario : { $gt: 5000 } }
-  ]
+    $and: [
+        { ciudad: "New York" },
+        { salario: { $gt: 5000 } }
+    ]
 });
 
 // 13 ?
-db.users.deleteMany({ correo : { $regex: /(spam)$/ } });
+db.users.deleteMany({ correo: { $regex: /(spam)$/ } });
 
 // 14
 db.users.deleteMany({
-  $and: [
-    { ciudad : "Bello" },
-    { edad : { $gt: 50 } }
-  ]
+    $and: [
+        { ciudad: "Bello" },
+        { edad: { $gt: 50 } }
+    ]
 });
 
 // 15
-db.users.deleteMany({ apellido : "Gonzalez" });
+db.users.deleteMany({ apellido: "Gonzalez" });
 
 // 16
-db.users.deleteMany({ edad : { $gt: 70 } });
+db.users.deleteMany({ edad: { $gt: 70 } });
 
 // 17
 db.users.deleteMany({
-  $and: [
-    { ciudad : "Canada" },
-    { salario : { $lt: 4000 } }
-  ]
+    $and: [
+        { ciudad: "Canada" },
+        { salario: { $lt: 4000 } }
+    ]
 });
 
 // 18
 db.users.deleteMany({
-  $and: [
-    { salario : { $gt: 1000 } },
-    { salario : { $lt: 2000 } }
-  ]
+    $and: [
+        { salario: { $gt: 1000 } },
+        { salario: { $lt: 2000 } }
+    ]
 });
 
 // 19
-db.users.deleteMany({ edad : { $eq: 30 } });
+db.users.deleteMany({ edad: { $eq: 30 } });
 
 // 20
-db.users.deleteMany({ altura : { $gt: 190 } });
+db.users.deleteMany({ altura: { $gt: 190 } });
+
+
+// --- Operaciones de Actualizacion ---
+db.users.find();
+
+// 1
+db.users.updateMany({}, { $mul: { salario: 1.1 } });
