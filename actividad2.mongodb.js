@@ -298,8 +298,8 @@ db.users.insertMany([
         apellidos: "Patil",
         correo: "nehal@gmail.com",
         genero: "F",
-        ciudad: "Bangalore",
-        pais: "India",
+        ciudad: "Detroit",
+        pais: "Estados Unidos",
         salario: 2523,
         edad: 24,
         altura: 163,
@@ -316,10 +316,161 @@ db.users.insertMany([
         edad: 26,
         altura: 175,
         peso: 170
+    },
+    {
+        nombres: "Hugo",
+        apellidos: "López",
+        correo: "hugolopez@example.com",
+        genero: "M",
+        ciudad: "Madrid",
+        pais: "España",
+        salario: 2800,
+        edad: 32,
+        altura: 180,
+        peso: 180
+    },
+    {
+        nombres: "Juan",
+        apellidos: "Perez",
+        correo: "juanperez@example.com",
+        genero: "M",
+        ciudad: "Amsterdam",
+        pais: "Holanda",
+        salario: 5500,
+        edad: 35,
+        altura: 175,
+        peso: 187
+    },
+    {
+        nombres: "Sophie",
+        apellidos: "Andersen",
+        correo: "ejemplo@riwi.es",
+        genero: "F",
+        ciudad: "Copenhague",
+        pais: "Dinamarca",
+        salario: 3200,
+        edad: 28,
+        altura: 168,
+        peso: 140
+    },
+    {
+        nombres: "Liam",
+        apellidos: "Smith",
+        correo: "otro@riwi.net",
+        genero: "M",
+        ciudad: "Londres",
+        pais: "Reino Unido",
+        salario: 3000,
+        edad: 30,
+        altura: 175,
+        peso: 160
+    },
+    {
+        nombres: "Maria",
+        apellidos: "Dupont",
+        correo: "emma.dupont@example.com",
+        genero: "F",
+        ciudad: "París",
+        pais: "Francia",
+        salario: 3400,
+        edad: 27,
+        altura: 165,
+        peso: 130
     }
 ]);
 
+db.users.insertOne({
+    nombres: "Maria",
+    apellidos: "Dupont",
+    correo: "emma.dupont@example.com",
+    genero: "F",
+    ciudad: "París",
+    pais: "Francia",
+    salario: 3400,
+    edad: 27,
+    altura: 165,
+    peso: 130
+});
+
+
+// --- Operaciones de Actualizacion ---
+db.users.find().skip(27);
+
+// 1
+db.users.updateMany({}, { $mul: { salario: 1.1 } });
+
+// 2
+db.users.updateMany(
+    { ciudad: "New York" },
+    { $set: { ciudad: "Los Angeles" } }
+);
+
+// 3
+db.users.find(
+    {
+        $and: [
+            { nombres: "Juan" },
+            { apellidos: "Perez" }
+        ]
+    }
+)
+
+db.users.updateOne(
+    {
+        $and: [
+            { nombres: "Juan" },
+            { apellidos: "Perez" }
+        ]
+    },
+    { $set: { correo: "nuevo@riwi.com" } }
+);
+
+// 4
+db.users.updateOne(
+    { correo: "ejemplo@riwi.es" },
+    { $set: { edad: 35 } }
+);
+
+// 5
+db.users.updateMany(
+    { pais: "Mexico" },
+    { $set: { pais: "Canada" } }
+);
+
+// 6
+db.users.updateMany(
+    {},
+    { $inc: { altura: 5 } }
+);
+
+// 7
+db.users.updateOne(
+    { correo: "otro@riwi.net" },
+    { $set: { apellidos: "Gonzalez" } }
+);
+
+// 8
+db.users.updateOne(
+    { nombres: "Maria" },
+    { $set: { peso: 140 } }
+);
+
+// 9
+db.users.updateMany(
+    { pais: "Estados Unidos" },
+    { $mul: { salario: 1.15 } }
+);
+
+// 10
+db.users.updateMany(
+    { nombres: "Pedro" },
+    { $set: { correo: "nuevo_correo@riwi.co" } }
+);
+
+
 // --- Operaciones de Eliminacion ---
+db.users.find().skip(20);
+
 
 // 1
 db.users.deleteMany({ salario: { $lt: 2000 } });
@@ -405,10 +556,3 @@ db.users.deleteMany({ edad: { $eq: 30 } });
 
 // 20
 db.users.deleteMany({ altura: { $gt: 190 } });
-
-
-// --- Operaciones de Actualizacion ---
-db.users.find();
-
-// 1
-db.users.updateMany({}, { $mul: { salario: 1.1 } });
